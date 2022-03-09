@@ -1,0 +1,89 @@
+@use "../components" as *;
+@use "../abstracts" as *;
+
+.signup-page {
+  width: 70%;
+  margin: 1rem auto;
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: $color-container-darken;
+}
+
+.signup-form {
+  width: 50%;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  > div > p {
+    margin-bottom: 1rem;
+    > i {
+      margin-right: 0.7rem;
+    }
+  }
+  > button {
+    padding: 0.7rem;
+    color: $color-primary;
+    border: none;
+    font-weight: 800;
+    letter-spacing: 0.04rem;
+    cursor: pointer;
+    box-shadow: 0px 2px 3px rgba($color: #000000, $alpha: 1);
+  }
+  > form {
+    @include input(100%);
+    > .input-wrapper {
+      margin-bottom: 1.5rem;
+    }
+    > p {
+      font-weight: 900;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      color: red;
+    }
+    > button {
+      width: 100%;
+      padding: 0.7rem;
+      background: black;
+      color: white;
+      border: none;
+      font-weight: 800;
+      letter-spacing: 0.04rem;
+      cursor: pointer;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.signup-box-left {
+  width: 50%;
+  padding: 2rem 1rem;
+  background: $color-primary;
+  > h2 {
+    font-family: $ramabhadra-font;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: $medium-screens) {
+  .signup-page {
+    width: 80%;
+  }
+}
+
+@media (max-width: $small-screens) {
+  .signup-page {
+    flex-direction: column;
+    width: 90%;
+  }
+  .signup-box-left {
+    width: 100%;
+  }
+  .signup-form {
+    width: 100%;
+  }
+}

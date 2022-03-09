@@ -1,0 +1,107 @@
+@use "../components" as *;
+@use "../abstracts" as *;
+
+.signIn {
+  width: 35%;
+  margin: 1rem auto;
+  position: relative;
+  padding: 0rem 2rem;
+
+  .brand-logo {
+    font-size: 2rem;
+    text-align: center;
+    display: block;
+  }
+
+  > div {
+    margin-top: 0.5rem;
+    > p {
+      display: block;
+      text-align: center;
+    }
+    > button {
+      position: relative;
+      width: 100%;
+      background: $color-body-lighten;
+      padding: 0.5rem;
+      margin: 1rem 0;
+      outline: none;
+      border: 1px solid black;
+      cursor: pointer;
+      overflow: hidden;
+      > p {
+        z-index: 1;
+        font-weight: 900;
+        position: relative;
+        color: black;
+        transition: all 200ms ease-in;
+      }
+      &::before {
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: -30rem;
+        background: black;
+        transition: all 300ms ease-in;
+      }
+    }
+    > button:hover {
+      > p {
+        color: white;
+      }
+
+      &::before {
+        left: 0;
+      }
+    }
+  }
+}
+
+.signIn-form {
+  // @include input(100%, "Email*", $color-container-darken);
+  @include input(100%);
+  margin: 1rem 0;
+  background: $color-container-darken;
+  border-radius: 5px;
+  padding: 1.5rem;
+  > h2 {
+    font-family: $roboto-font;
+    margin-bottom: 2rem;
+  }
+  > button {
+    width: 100%;
+    color: white;
+    font-weight: 900;
+    background: black;
+    padding: 0.5rem;
+    margin: 1.5rem 0;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      animation: buttonSlide 500ms ease-in 1;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+@keyframes buttonSlide {
+  0% {
+    background: black;
+  }
+  100% {
+    background: $color-primary;
+  }
+}
+
+@media (max-width: $medium-screens) {
+  .signIn {
+    width: 60%;
+  }
+}
+
+@media (max-width: $small-screens) {
+  .signIn {
+    width: 80%;
+  }
+}

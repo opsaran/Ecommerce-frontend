@@ -1,0 +1,62 @@
+@use "../abstracts" as *;
+
+.bg-cartmodal {
+  z-index: 101;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color: #000000, $alpha: 0.6);
+}
+
+.cartmodal {
+  background-color: $color-container-darken;
+  overflow-y: auto;
+  width: 400px;
+  position: absolute;
+  top: 0;
+  right: 0rem;
+  z-index: 1000;
+  height: 100%;
+  padding: 1.5rem 2rem;
+  animation: modalAnim 300ms ease-out;
+}
+
+@keyframes modalAnim {
+  from {
+    right: -400px;
+  }
+  to {
+    right: 0;
+  }
+}
+
+.cartmodal-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.cartmodal-product {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  width: 100%;
+  > img {
+    height: 4rem;
+    width: 4rem;
+  }
+  > h4 {
+    flex-basis: 50%;
+  }
+}
+
+.cartmodal-bottom-button {
+  padding: 0.8rem 2rem;
+  margin: auto;
+  display: block;
+}

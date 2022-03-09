@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AuthContextProvider } from "./contexts/authcontext";
+import Navbar from "./components/navbar/navbar";
+import HomePage from "./pages/home/home";
+import Login from "./pages/login/login";
+import Signup from "./pages/register/register";
+import ProductDetails from "./pages/product-details/productDetails";
+import CartModal from "./components/cartmodal";
+import CartPage from "./pages/cart/cartpage";
 
 function App() {
+  const location = useLocation();
+  const state = location.state as { backgroundLocation: Location };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AuthContextProvider>
+        <Routes location={state?.backgroundLocation || location}>
+          <Route
+            path="/"
+            element={<Navbar style={state?.backgroundLocation && {}} />}
+          >
+            <Route index element={<HomePage />} />
+            <Route path="product/:id" element={<ProductDetails />}></Route>
+            <Route path="register" element={<Signup />}></Route>
+            <Route path="login" element={<Login />}></Route>
+            <Route path="cart" element={<CartPage />}></Route>
+          </Route>
+        </Routes>
+        {/* show the modal when backgroundLocation is set */}
+        {state?.backgroundLocation && (
+          <Routes>
+            <Route path="/cart" element={<CartModal />}></Route>
+          </Routes>
+        )}
+      </AuthContextProvider>
     </div>
   );
 }

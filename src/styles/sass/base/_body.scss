@@ -1,0 +1,13 @@
+@use "../abstracts" as *;
+
+body {
+  background: $color-body-primary;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+}
+
+ul,
+li {
+  list-style: none;
+}

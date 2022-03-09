@@ -1,0 +1,8 @@
+@use "./colors" as *;
+
+@mixin gradient-text {
+  background-image: linear-gradient(120deg, $color-primary, $color-nav-icons);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  color: transparent;
+}

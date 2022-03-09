@@ -1,0 +1,94 @@
+@use "../abstracts" as *;
+
+@mixin input($width) {
+  .input-wrapper {
+    width: $width;
+    display: flex;
+    flex-direction: column;
+    > label {
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+      font-weight: 900;
+    }
+
+    > input {
+      position: relative;
+      height: 2.8rem;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      outline: none;
+      padding-left: 1rem;
+      border: 1px solid $color-primary;
+      background: transparent;
+      &:hover {
+        border: 2px solid $color-primary;
+      }
+
+      &:focus {
+        box-shadow: 0px 0px 15px 3px $color-primary;
+      }
+    }
+  }
+}
+
+// @mixin input($width, $content, $content-background) {
+//   .input-wrapper {
+//     width: $width;
+//     position: relative;
+//   }
+//   input {
+//     box-sizing: content-box;
+//     line-height: 1.5rem;
+//     padding: 0;
+//     margin: 0.5rem 1rem 1rem 1.1rem;
+//     width: 100%;
+//     background-color: transparent;
+//     color: black;
+//     letter-spacing: 0.05rem;
+//     font-size: 1rem;
+//     font-weight: 900;
+//     outline: none;
+//     border: none;
+//     font-size: medium;
+//   }
+
+//   fieldset {
+//     pointer-events: none;
+//     position: absolute;
+//     top: -0.4rem;
+//     left: 0;
+//     bottom: 0;
+//     padding: 0 1rem;
+//     width: 100%;
+//     border: 1px solid black;
+//     transition: 100ms ease-in;
+//     border-radius: 4px;
+//     &::after {
+//       content: $content;
+//       font-weight: 800;
+//       color: rgb(105, 104, 104);
+//       position: absolute;
+//       top: 1rem;
+//       padding: 0 0.2rem;
+//       background-color: $content-background;
+//       transition: 100ms ease-in;
+//     }
+//   }
+
+//   .input-wrapper:hover > fieldset {
+//     border-color: $color-primary;
+//   }
+
+//   input:focus + fieldset,
+//   input:valid + fieldset {
+//     border: 2px solid $color-primary;
+//   }
+//   input:focus + fieldset::after {
+//     top: -0.8rem;
+//     font-size: 0.8rem;
+//   }
+//   input:valid + fieldset::after {
+//     top: -0.8rem;
+//     font-size: 0.8rem;
+//   }
+// }
