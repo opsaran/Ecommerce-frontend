@@ -1,9 +1,9 @@
 import React from "react";
 import { useFullCart } from "../../hooks/usefullcart";
-// import { fetchFullCart } from "../../components/cartmodal";
-
+import CartQuantity from "./cartquantity";
 export default function CartPage() {
-  const fullCart = useFullCart();
+  const { fullCart } = useFullCart();
+
   return (
     <div className="cartpage">
       <h2>Your Cart</h2>
@@ -26,8 +26,11 @@ export default function CartPage() {
                     </span>
                   </div>
                 </div>
-                <h5>{product.quantity}</h5>
-                <h5>Rs. {product._id.price}</h5>
+                <CartQuantity
+                  productId={product._id._id}
+                  defaultQuantity={product.quantity}
+                  price={product._id.price}
+                />
               </div>
             );
           })}
@@ -38,8 +41,8 @@ export default function CartPage() {
             <span>SUBTOTAL</span>
             <span>
               Rs.
-              {fullCart.products.reduce((total, product) => {
-                return (total = total + product._id.price * product.quantity);
+              {fullCart.products.reduce((total, obj) => {
+                return (total = total + obj._id.price * obj.quantity);
               }, 0)}
             </span>
           </div>
@@ -55,8 +58,8 @@ export default function CartPage() {
             <span style={{ fontSize: "1.5rem" }}>TOTAL</span>
             <span style={{ fontSize: "1.5rem" }}>
               Rs.
-              {fullCart.products.reduce((total, product) => {
-                return (total = total + product._id.price * product.quantity);
+              {fullCart.products.reduce((total, obj) => {
+                return (total = total + obj._id.price * obj.quantity);
               }, 0)}
             </span>
           </div>

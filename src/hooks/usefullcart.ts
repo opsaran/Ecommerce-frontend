@@ -53,5 +53,5 @@ export function useFullCart() {
       fetchFullCart();
     }
   }, [user]);
-  return fullCart;
+  return { fullCart, setFullCart };
 }

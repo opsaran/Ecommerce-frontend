@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFullCart } from "../hooks/usefullcart";
 
 export default function CartModal() {
-  const fullCart = useFullCart();
+  const { fullCart } = useFullCart();
 
   const navigate = useNavigate();
 

@@ -30,15 +30,21 @@ export default function NavBar({ style }: { style: React.CSSProperties }) {
         </div>
         <div className="nav-icons">
           <button>{/* <i className="fas fa-search"></i> */}</button>
-          <Link to="/cart" state={{ backgroundLocation: location }}>
+          <Link
+            to="/cart"
+            state={{ backgroundLocation: location }}
+            style={
+              location.pathname === "/cart"
+                ? { display: "none" }
+                : { display: "block" }
+            }
+          >
             {/* <i className="fas fa-shopping-cart"></i> */}
           </Link>
           <button
             onMouseOver={() => setStyles({ display: "flex" })}
             onMouseLeave={() => setStyles({ display: "none" })}
-          >
-            {/* <i className="far fa-user"></i> */}
-          </button>
+          ></button>
           <button onClick={handleham} className="nav-ham-button">
             {/* <i className="fas fa-bars"></i> */}
           </button>

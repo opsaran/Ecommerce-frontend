@@ -8,6 +8,7 @@ import Signup from "./pages/register/register";
 import ProductDetails from "./pages/product-details/productDetails";
 import CartModal from "./components/cartmodal";
 import CartPage from "./pages/cart/cartpage";
+import SellerPost from "./pages/sellerpost/sellerpost";
 
 function App() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function App() {
             <Route path="register" element={<Signup />}></Route>
             <Route path="login" element={<Login />}></Route>
             <Route path="cart" element={<CartPage />}></Route>
+            <Route path="sellerpost" element={<SellerPost />}></Route>
           </Route>
         </Routes>
         {/* show the modal when backgroundLocation is set */}
