@@ -1,9 +1,9 @@
 // import pageInterface from "../../interfaces/pageinterface";
-import React, { useContext, useEffect } from "react";
+import React from "react";
 
 import Benefits from "./benefits";
-import firstpic from "../../../public/images/firstpic.png";
-import handpic from "../../../public/images/handpic.png";
+
+import handpic from "/images/handpic.png";
 import Featured from "./featured";
 import kachariImage from "/images/kachari.jpg";
 export default function HomePage() {
