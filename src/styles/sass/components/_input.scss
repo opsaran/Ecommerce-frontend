@@ -11,7 +11,8 @@
       font-weight: 900;
     }
 
-    > input {
+    > input,
+    > textarea {
       position: relative;
       height: 2.8rem;
       font-size: 1.2rem;
@@ -28,7 +29,13 @@
         box-shadow: 0px 0px 15px 3px $color-primary;
       }
     }
+    > textarea {
+      padding-top: 0.5rem;
+    }
   }
+}
+
+@mixin select($width) {
 }
 
 // @mixin input($width, $content, $content-background) {

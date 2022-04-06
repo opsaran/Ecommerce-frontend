@@ -3,9 +3,8 @@ import React from "react";
 
 import Benefits from "./benefits";
 
-import handpic from "/images/handpic.png";
 import Featured from "./featured";
-import kachariImage from "/images/kachari.jpg";
+import kachariImage from "/images/kachari.webp";
 export default function HomePage() {
   return (
     <>
@@ -13,23 +12,19 @@ export default function HomePage() {
         <div>
           <div className="landing-content">
             <h2>
-              EXOTIC <span>RAJASTHANI</span> FRUITS AND VEGETABLES
+              COOL <span>MEMAZONI</span> GOODS AND 10s DELIVERIES
             </h2>
 
+            <p>Just kidding, it's a meme store. I thank you for visiting.</p>
             <p>
-              Lose fat, improve metabolism and fill your life with a brand new
-              taste.
-            </p>
-            <p>
-              Not many people outside of this region are aware of these gifts of
-              nature, we bring you the best quality with rapid fast delivery,
-              all over India.
+              I advise you to buy and sell stuff on this platform. Login gives
+              you added benefits like selling and adding products to your
+              personal cart.
             </p>
             <button>
               Order Now <i className="fas fa-angle-right"></i>
             </button>
           </div>
-          <img src={handpic} alt="handpic" className="handpicture" />
         </div>
 
         <img src={kachariImage} alt="picture" className="landing-image" />

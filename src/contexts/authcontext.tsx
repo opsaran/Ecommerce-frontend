@@ -34,10 +34,10 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
           name: response.data.user.name,
           cart: response.data.cart,
         });
-        console.log("on context, current user:", response.data);
+        // console.log("on context, current user:", response.data);
       } catch (error: any) {
         setUser({ active: false, name: "", cart: null });
-        console.log("context error", error.response.data.message);
+        // console.log("context error", error.response.data.message);
       }
     }
     fetchData();

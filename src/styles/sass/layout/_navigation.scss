@@ -65,7 +65,7 @@ nav {
     display: none;
     border: none;
     cursor: pointer;
-    background-position: 0 -85px;
+    background-position: 3px -85px;
   }
 }
 
@@ -74,10 +74,10 @@ nav {
   position: absolute;
   display: none;
   padding: 1rem 3rem;
-  left: 79vw;
-  top: 45px;
-  width: 250px;
-  height: 150px;
+  right: 1rem;
+  top: 2.7rem;
+  width: fit-content;
+  height: fit-content;
   background: white;
   border-radius: 7px;
   box-shadow: 0 3px 3px 4px rgb(166, 221, 212);
@@ -116,10 +116,21 @@ nav {
     }
   }
 }
+
+#account-hover-close {
+  position: absolute;
+  right: 0.3rem;
+  top: 0.4rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  line-height: 0.7rem;
+  cursor: pointer;
+}
+
 .nav-small-triangle {
   position: absolute;
-  top: -10px;
-  left: 200px;
+  top: -0.5rem;
+  right: 2.8rem;
   width: 15px;
   height: 15px;
   background: white;
@@ -176,5 +187,11 @@ nav {
     box-shadow: -5px 10px 20px 2px $color-primary;
     border-radius: 7px;
     background-color: $color-body-lighten;
+  }
+  .nav-ham-button {
+    display: flex !important;
+  }
+  .nav-small-triangle {
+    right: 3.3rem;
   }
 }

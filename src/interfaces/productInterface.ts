@@ -1,16 +1,14 @@
 export interface featuredProductInterface {
   _id: string;
+  seller: string;
   title: string;
   description: string;
   inStock: boolean;
   expiryTime: string;
-  catagory: string;
+  category: string;
   price: number;
-  images: {
-    image1: string;
-    image2: string;
-    image3: string;
-  };
+  defaultQuantity: string;
+  images: { name: string; type: string; size: number; base64: string }[];
 }
 
 export interface productLocationState {
@@ -19,6 +17,6 @@ export interface productLocationState {
 
 export interface chosenProduct {
   isChosen: boolean;
-  product: featuredProductInterface;
+
   quantity: number;
 }

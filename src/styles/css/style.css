@@ -88,7 +88,7 @@ nav div > a {
   display: none;
   border: none;
   cursor: pointer;
-  background-position: 0 -85px;
+  background-position: 3px -85px;
 }
 
 .account-hover-box {
@@ -96,10 +96,10 @@ nav div > a {
   position: absolute;
   display: none;
   padding: 1rem 3rem;
-  left: 79vw;
-  top: 45px;
-  width: 250px;
-  height: 150px;
+  right: 1rem;
+  top: 2.7rem;
+  width: fit-content;
+  height: fit-content;
   background: white;
   border-radius: 7px;
   box-shadow: 0 3px 3px 4px #a6ddd4;
@@ -140,10 +140,20 @@ nav div > a {
   border: none;
 }
 
+#account-hover-close {
+  position: absolute;
+  right: 0.3rem;
+  top: 0.4rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  line-height: 0.7rem;
+  cursor: pointer;
+}
+
 .nav-small-triangle {
   position: absolute;
-  top: -10px;
-  left: 200px;
+  top: -0.5rem;
+  right: 2.8rem;
   width: 15px;
   height: 15px;
   background: white;
@@ -181,6 +191,14 @@ nav div > a {
     border-radius: 7px;
     background-color: #e9f7f1;
   }
+
+  .nav-ham-button {
+    display: flex !important;
+  }
+
+  .nav-small-triangle {
+    right: 3.3rem;
+  }
 }
 .mobile-nav-open {
   filter: opacity(0.6);
@@ -206,11 +224,6 @@ nav div > a {
   width: 35%;
   object-fit: cover;
   border-radius: 7px;
-}
-
-.handpicture {
-  position: absolute;
-  top: 3rem;
 }
 
 .landing-content {
@@ -324,6 +337,12 @@ nav div > a {
   margin: 1rem auto;
   width: fit-content;
   margin-bottom: 2rem;
+}
+.featured-section > button {
+  display: block;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  cursor: pointer;
 }
 
 .featured-products {
@@ -599,7 +618,8 @@ nav div > a {
   margin-bottom: 0.4rem;
   font-weight: 900;
 }
-.delivery-option .input-wrapper > input {
+.delivery-option .input-wrapper > input,
+.delivery-option .input-wrapper > textarea {
   position: relative;
   height: 2.8rem;
   font-size: 1.2rem;
@@ -609,11 +629,16 @@ nav div > a {
   border: 1px solid #05d179;
   background: transparent;
 }
-.delivery-option .input-wrapper > input:hover {
+.delivery-option .input-wrapper > input:hover,
+.delivery-option .input-wrapper > textarea:hover {
   border: 2px solid #05d179;
 }
-.delivery-option .input-wrapper > input:focus {
+.delivery-option .input-wrapper > input:focus,
+.delivery-option .input-wrapper > textarea:focus {
   box-shadow: 0px 0px 15px 3px #05d179;
+}
+.delivery-option .input-wrapper > textarea {
+  padding-top: 0.5rem;
 }
 .delivery-option > h3 {
   font-family: "Roboto Slab", serif;
@@ -729,7 +754,8 @@ nav div > a {
   margin-bottom: 0.4rem;
   font-weight: 900;
 }
-.signIn-form .input-wrapper > input {
+.signIn-form .input-wrapper > input,
+.signIn-form .input-wrapper > textarea {
   position: relative;
   height: 2.8rem;
   font-size: 1.2rem;
@@ -739,11 +765,16 @@ nav div > a {
   border: 1px solid #05d179;
   background: transparent;
 }
-.signIn-form .input-wrapper > input:hover {
+.signIn-form .input-wrapper > input:hover,
+.signIn-form .input-wrapper > textarea:hover {
   border: 2px solid #05d179;
 }
-.signIn-form .input-wrapper > input:focus {
+.signIn-form .input-wrapper > input:focus,
+.signIn-form .input-wrapper > textarea:focus {
   box-shadow: 0px 0px 15px 3px #05d179;
+}
+.signIn-form .input-wrapper > textarea {
+  padding-top: 0.5rem;
 }
 .signIn-form > h2 {
   font-family: "Roboto Slab", serif;
@@ -824,7 +855,8 @@ nav div > a {
   margin-bottom: 0.4rem;
   font-weight: 900;
 }
-.signup-form > form .input-wrapper > input {
+.signup-form > form .input-wrapper > input,
+.signup-form > form .input-wrapper > textarea {
   position: relative;
   height: 2.8rem;
   font-size: 1.2rem;
@@ -834,11 +866,16 @@ nav div > a {
   border: 1px solid #05d179;
   background: transparent;
 }
-.signup-form > form .input-wrapper > input:hover {
+.signup-form > form .input-wrapper > input:hover,
+.signup-form > form .input-wrapper > textarea:hover {
   border: 2px solid #05d179;
 }
-.signup-form > form .input-wrapper > input:focus {
+.signup-form > form .input-wrapper > input:focus,
+.signup-form > form .input-wrapper > textarea:focus {
   box-shadow: 0px 0px 15px 3px #05d179;
+}
+.signup-form > form .input-wrapper > textarea {
+  padding-top: 0.5rem;
 }
 .signup-form > form > .input-wrapper {
   margin-bottom: 1.5rem;
@@ -973,6 +1010,140 @@ nav div > a {
     margin-right: auto;
   }
 }
+.sellerpost-page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: 1rem auto 0.8rem;
+  border-radius: 7px;
+  box-shadow: 0 0 15px 2px #726d6d;
+}
+
+.sellerpost-errors {
+  color: #f72e2e;
+}
+.sellerpost-errors > p {
+  margin-bottom: 0.5rem;
+}
+
+.sellerpost-form {
+  width: 100%;
+  background: #bed8cd;
+  padding: 1.5rem 3rem;
+}
+.sellerpost-form .input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.sellerpost-form .input-wrapper > label {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-weight: 900;
+}
+.sellerpost-form .input-wrapper > input,
+.sellerpost-form .input-wrapper > textarea {
+  position: relative;
+  height: 2.8rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 1rem;
+  border: 1px solid #05d179;
+  background: transparent;
+}
+.sellerpost-form .input-wrapper > input:hover,
+.sellerpost-form .input-wrapper > textarea:hover {
+  border: 2px solid #05d179;
+}
+.sellerpost-form .input-wrapper > input:focus,
+.sellerpost-form .input-wrapper > textarea:focus {
+  box-shadow: 0px 0px 15px 3px #05d179;
+}
+.sellerpost-form .input-wrapper > textarea {
+  padding-top: 0.5rem;
+}
+.sellerpost-form > .input-wrapper {
+  margin-bottom: 0.5rem;
+}
+.sellerpost-form > button {
+  margin-top: 1.3rem;
+  padding: 0.7em 2.1em;
+  border-radius: 7px;
+  cursor: pointer;
+  border: 1px solid #05d179;
+  background: #05d179;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 0.06rem;
+}
+.sellerpost-form > button:hover {
+  background: #e9f7f1;
+}
+
+#priceinput-label {
+  position: relative;
+}
+#priceinput-label::after {
+  content: "Rs.";
+  position: absolute;
+  top: 2.4rem;
+  right: 0;
+  color: #5f5d5d;
+}
+
+.select-wrapper {
+  margin-top: 1.2rem;
+}
+.select-wrapper > label {
+  font-size: 1.2rem;
+  margin-right: 2rem;
+  font-weight: 900;
+}
+.select-wrapper > select {
+  padding: 0.3rem 0.9rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #e9f7f1;
+  border-radius: 7px;
+}
+.select-wrapper > select > option {
+  margin-top: 1rem;
+}
+
+.imageinput-wrapper {
+  margin-top: 1.3rem;
+}
+.imageinput-wrapper > label {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-weight: 900;
+  margin-right: 2rem;
+}
+.imageinput-wrapper > input {
+  cursor: pointer;
+}
+
+@media (min-width: 40em) and (max-width: 65em) {
+  .sellerpost-page {
+    width: 70%;
+  }
+}
+@media (max-width: 40em) {
+  .sellerpost-page {
+    width: 93%;
+  }
+
+  .select-wrapper > select {
+    margin-top: 0.5rem;
+    padding: 0.8em 2em;
+  }
+
+  .imageinput-wrapper > input {
+    margin-top: 0.5rem;
+  }
+}
 .bg-cartmodal {
   z-index: 101;
   position: fixed;
@@ -1031,6 +1202,17 @@ nav div > a {
   padding: 0.8rem 2rem;
   margin: auto;
   display: block;
+}
+
+@media (min-width: 40em) and (max-width: 65em) {
+  .cartmodal {
+    width: 30%;
+  }
+}
+@media (max-width: 40em) {
+  .cartmodal {
+    width: 60%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -37,6 +37,12 @@ export default function AccountHoverBox({
       onMouseOver={() => setStyles({ display: "flex" })}
       onMouseLeave={() => setStyles({ display: "none" })}
     >
+      <span
+        id="account-hover-close"
+        onClick={() => setStyles({ display: "none" })}
+      >
+        x
+      </span>
       {user.active ? (
         <div>
           <div className="nav-small-triangle"></div>

@@ -1,5 +1,6 @@
 import { AxiosError, AxiosRequestConfig } from "axios";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 
 interface imageDataInterface {
@@ -20,7 +21,7 @@ interface formDataInterface {
 }
 export default function SellerPost() {
   const inputFileRef = useRef<HTMLInputElement>(null);
-  // const [files, setFiles] = useState<any>([]);
+  const navigate = useNavigate();
 
   const formDataInitial = {
     title: "",
@@ -128,7 +129,9 @@ export default function SellerPost() {
             formData,
             config
           );
-          console.log("we got back this response: ", response.data);
+          if (response.data.suceess) {
+            navigate({ pathname: "/" });
+          }
         } catch (error: any) {
           console.log(
             "oh erro back: ",
@@ -150,17 +153,12 @@ export default function SellerPost() {
   const errorElmRef = useRef<HTMLParagraphElement>(null);
 
   return (
-    <div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit saepe
-        perferendis, ex, dolorem ducimus id mollitia quae, consequatur est sit
-        iure ipsa blanditiis labore sint. Sit ipsum, officia excepturi
-        recusandae ex quam! Deserunt, vitae autem? Alias aliquid, ea cupiditate
-        voluptate esse, veritatis doloribus eum quia minus animi obcaecati
-        temporibus? Nesciunt?
-      </p>
-      <form onSubmit={submitHandler}>
-        <div>
+    <div className="sellerpost-page">
+      <div className="sellerpost-errors">
+        {errors && errors.map((err, i) => <p key={i}>{err}</p>)}
+      </div>
+      <form onSubmit={submitHandler} className="sellerpost-form">
+        <div className="input-wrapper">
           <label htmlFor="titleInput">Title</label>
           <input
             name="title"
@@ -170,7 +168,7 @@ export default function SellerPost() {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="input-wrapper">
           <label htmlFor="descriptionInput">Description</label>
           <textarea
             id="descriptionInput"
@@ -181,8 +179,10 @@ export default function SellerPost() {
             onChange={handleChange}
           ></textarea>
         </div>
-        <div>
-          <label htmlFor="priceInput">Price</label>
+        <div className="input-wrapper">
+          <label htmlFor="priceInput" id="priceinput-label">
+            Price
+          </label>
           <input
             name="price"
             required
@@ -190,8 +190,8 @@ export default function SellerPost() {
             onChange={handlePriceChange}
           />
         </div>
-        <div>
-          <label htmlFor="categorySelect">Category</label>
+        <div className="select-wrapper">
+          <label htmlFor="categorySelect">Category:</label>
           <select id="categorySelect" name="category" onChange={handleChange}>
             <option value="fashion">Fashion</option>
             <option value="food">Food</option>
@@ -200,8 +200,8 @@ export default function SellerPost() {
             <option value="electronics">Electronics</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="expiryInput">Expiry Time in shelf</label>
+        <div className="select-wrapper">
+          <label htmlFor="expiryInput">Expiry Time in shelf:</label>
           <select id="expiryInput" name="expiryTime" onChange={handleChange}>
             <option value="none">None</option>
             <option value="1 month">1 Month</option>
@@ -212,22 +212,22 @@ export default function SellerPost() {
             <option value="6 month">6 Month</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="defquant">Default Quantity</label>
+        <div className="select-wrapper">
+          <label htmlFor="defquant">Default Quantity:</label>
           <select id="defquant" name="defaultQuantity" onChange={handleChange}>
             <option value="1 kg">1 Kg</option>
             <option value="1 litre">1 Litre</option>
             <option value="1 unit">1 Unit</option>
           </select>
         </div>
-        <div>
+        <div className="select-wrapper">
           <label htmlFor="instockInput">Is the Item in Stock?</label>
           <select id="instockInput" name="inStock" onChange={handleChange}>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
         </div>
-        <div>
+        <div className="imageinput-wrapper">
           <label htmlFor="imagesInput">Add Images:</label>
           <input
             type="file"
@@ -240,7 +240,6 @@ export default function SellerPost() {
         {submitting && <p>Progress: {progress}</p>}
         <button type="submit">Submit</button>
       </form>
-      {errors && <p>{errors[0]}</p>}
     </div>
   );
 }

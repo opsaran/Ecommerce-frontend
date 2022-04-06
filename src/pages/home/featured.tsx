@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
-import firstpic from "../../assets/images/firstpic.png";
-import secondpic from "../../assets/images/secondpic.png";
+// import firstpic from "../../assets/images/firstpic.png";
+// import secondpic from "../../assets/images/secondpic.png";
 import axiosInstance from "../../utils/axiosInstance";
 import { featuredProductInterface } from "../../interfaces/productInterface";
 
@@ -23,6 +23,7 @@ import { featuredProductInterface } from "../../interfaces/productInterface";
 // ];
 enum ACTION_TYPE {
   addProducts = "addProducts",
+  emptyProducts = "emptyProducts",
 }
 
 function myReducer(
@@ -32,6 +33,8 @@ function myReducer(
   switch (action.type) {
     case ACTION_TYPE.addProducts:
       return [...featuredProducts, ...action.products];
+    case ACTION_TYPE.emptyProducts:
+      return [];
     default:
       throw new Error("I don't know man!");
   }
@@ -41,34 +44,56 @@ function myReducer(
 
 function Featured(): JSX.Element {
   const [featuredProducts, dispatch] = useReducer(myReducer, []);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState<string>();
+
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axiosInstance.get("/featuredproducts");
-        console.log("kinda successfull", response.data.featuredProducts);
+        const response = await axiosInstance.get(
+          `/featuredproducts?page=${page}`
+        );
+        console.log("kinda successfull", response.data);
         if (response) {
+          setLoading(false);
+          setTotalPages(response.data.pagination.totalPages);
           dispatch({
             type: ACTION_TYPE.addProducts,
             products: response.data.featuredProducts,
           });
         }
       } catch (error: any) {
-        console.log("Something went wrong: ", error.response.data.message);
+        setLoading(false);
+        if (error.response) {
+          setErrors(error.response.data.message);
+        } else if (error.toJSON().message === "Network Error") {
+          setErrors(error.toJSON().message);
+        }
       }
     }
     fetchProducts();
-  }, []);
+  }, [page]);
+
+  if (loading) {
+    return <p>Loading....</p>;
+  }
+
+  if (errors) {
+    return <p>{errors}</p>;
+  }
 
   return (
     <section className="featured-section">
       <h2>Featured Products</h2>
       <ul className="featured-products">
-        {featuredProducts.map((product, index) => {
+        {featuredProducts.map((product) => {
           return (
-            <li className="product" key={index}>
+            <li className="product" key={product._id}>
               <Link to={`/product/${product._id}`} state={{ product }}>
                 <img
-                  src={product.images.image1}
+                  src={product.images[0].base64}
                   alt="productpic1"
                   className="product-imageComponent"
                 />
@@ -86,6 +111,18 @@ function Featured(): JSX.Element {
           );
         })}
       </ul>
+
+      <button
+        disabled={page === totalPages}
+        onClick={() => {
+          setPage((p) => {
+            if (p === totalPages) return p;
+            return p + 1;
+          });
+        }}
+      >
+        Show More
+      </button>
     </section>
   );
 }

@@ -20,13 +20,15 @@ export default function NavBar({ style }: { style: React.CSSProperties }) {
       <nav>
         <div>
           <Link to="/" className="brand-logo">
-            RajFoods
+            Memazon
           </Link>
         </div>
         <div className="nav-options">
-          <a>Dry Foods</a>
-          <a>Wet Foods</a>
-          <a>Drinks</a>
+          <a>Fashion</a>
+          <a>Foods</a>
+          <a>Electronicss</a>
+          <a>Grocery</a>
+          <a>Books</a>
         </div>
         <div className="nav-icons">
           <button>{/* <i className="fas fa-search"></i> */}</button>
@@ -42,8 +44,17 @@ export default function NavBar({ style }: { style: React.CSSProperties }) {
             {/* <i className="fas fa-shopping-cart"></i> */}
           </Link>
           <button
-            onMouseOver={() => setStyles({ display: "flex" })}
-            onMouseLeave={() => setStyles({ display: "none" })}
+            onClick={() =>
+              setStyles((prev) => {
+                if (prev.display === "flex") {
+                  return { display: "none" };
+                } else {
+                  return { display: "flex" };
+                }
+              })
+            }
+            // onMouseOver={() => setStyles({ display: "flex" })}
+            // onMouseLeave={() => setStyles({ display: "none" })}
           ></button>
           <button onClick={handleham} className="nav-ham-button">
             {/* <i className="fas fa-bars"></i> */}

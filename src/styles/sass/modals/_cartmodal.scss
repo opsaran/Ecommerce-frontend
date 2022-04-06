@@ -60,3 +60,15 @@
   margin: auto;
   display: block;
 }
+
+@media (min-width: $small-screens) and (max-width: $medium-screens) {
+  .cartmodal {
+    width: 30%;
+  }
+}
+
+@media (max-width: $small-screens) {
+  .cartmodal {
+    width: 60%;
+  }
+}

@@ -13,32 +13,31 @@ function ProductDetails() {
   const { user, setUser } = useContext(authContext);
   const { id } = useParams();
   const location = useLocation();
+
   // const { product } = location.state as productLocationState;
-  const [product, setProduct] = useState<featuredProductInterface>({
-    _id: "",
-    catagory: "",
-    description: "",
-    expiryTime: "",
-    images: { image1: "", image2: "", image3: "" },
-    inStock: false,
-    price: 0,
-    title: "",
-  });
-  const [currentImage, setCurrentImage] = useState(product.images.image1);
+  const [product, setProduct] = useState<featuredProductInterface>();
+  const [currentImage, setCurrentImage] = useState("");
   const navigate = useNavigate();
+
+  const locationProduct = location.state as productLocationState;
   useEffect(() => {
-    async function fetchProduct() {
-      try {
-        const productData = await axiosInstance.get(`/product/${id}`);
-        console.log("we got the product back: ", productData.data.product);
-        setProduct(productData.data.product);
-        setCurrentImage(productData.data.product.images.image1);
-      } catch (error) {
-        console.log("could not find the product bro");
-        navigate({ pathname: "/" });
+    if (locationProduct) {
+      setProduct(locationProduct.product);
+      setCurrentImage(locationProduct.product.images[0].base64);
+    } else {
+      async function fetchProduct() {
+        try {
+          const productData = await axiosInstance.get(`/product/${id}`);
+          console.log("we got the product back: ", productData.data.product);
+          setProduct(productData.data.product);
+          setCurrentImage(productData.data.product.images.image1);
+        } catch (error) {
+          console.log("could not find the product bro");
+          navigate({ pathname: "/" });
+        }
       }
+      fetchProduct();
     }
-    fetchProduct();
   }, []);
   // console.log("Okay:", id);
   // console.log("This is what you wanted me to send:", product);
@@ -46,7 +45,7 @@ function ProductDetails() {
   const [chosenQuantity, setChosenQuantity] = useState<number>(1);
   const [chosenProduct, setChosenProduct] = useState<chosenProduct>({
     isChosen: false,
-    product: product,
+
     quantity: 1,
   });
   const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
@@ -115,97 +114,105 @@ function ProductDetails() {
   }, [chosenProduct]);
 
   return (
-    <div className="product-details">
-      <div className="product-images-area">
-        <div className="product-image-options" onClick={handleImageChange}>
-          <button className="current-product-image">
-            <img src={product.images.image1} alt="productpic" />
-          </button>
-          <button>
-            <img src={product.images.image2} alt="productpic" />
-          </button>
-        </div>
-        <div className="product-image">
-          <img src={currentImage} alt="productpic" />
-        </div>
-      </div>
-      <div className="product-fullDetails">
-        <h2>{product.title}</h2>
-        <h3>({product.inStock ? "In Stock" : "Not in Stock"})</h3>
-        <hr />
-        <div className="product-price">
-          <h2>Rs {product.price}</h2>
-          <p>(Inclusive of all taxes)</p>
-        </div>
+    <>
+      {product ? (
+        <div className="product-details">
+          <div className="product-images-area">
+            <div className="product-image-options" onClick={handleImageChange}>
+              {product.images.map((imgData) => (
+                <button
+                  className="current-product-image"
+                  key={`${imgData.size}${imgData.name}`}
+                >
+                  <img src={imgData.base64} alt="productpic" />
+                </button>
+              ))}
+            </div>
+            <div className="product-image">
+              <img src={currentImage} alt="productpic" />
+            </div>
+          </div>
+          <div className="product-fullDetails">
+            <h2>{product.title}</h2>
+            <h3>({product.inStock ? "In Stock" : "Not in Stock"})</h3>
+            <hr />
+            <div className="product-price">
+              <h2>Rs {product.price}</h2>
+              <p>(Inclusive of all taxes)</p>
+            </div>
 
-        <div className="product-quantity">
-          <h3>Select Quantity:</h3>
-          <div>
-            <button
-              onClick={() =>
-                setChosenQuantity((chosenQuantity) => chosenQuantity - 1)
-              }
-            >
-              -
-            </button>
-            <span>
-              {chosenQuantity < 1 ? setChosenQuantity(1) : chosenQuantity} Kg
-            </span>
-            <button
-              onClick={() =>
-                setChosenQuantity((chosenQuantity) => chosenQuantity + 1)
-              }
-            >
-              +
-            </button>
-          </div>
-        </div>
+            <div className="product-quantity">
+              <h3>Select Quantity:</h3>
+              <div>
+                <button
+                  onClick={() =>
+                    setChosenQuantity((chosenQuantity) => chosenQuantity - 1)
+                  }
+                >
+                  -
+                </button>
+                <span>
+                  {chosenQuantity < 1 ? setChosenQuantity(1) : chosenQuantity}{" "}
+                  Kg
+                </span>
+                <button
+                  onClick={() =>
+                    setChosenQuantity((chosenQuantity) => chosenQuantity + 1)
+                  }
+                >
+                  +
+                </button>
+              </div>
+            </div>
 
-        <div className="product-actions">
-          <button
-            onClick={(e) => {
-              setChosenProduct({
-                isChosen: true,
-                quantity: chosenQuantity,
-                product: product,
-              });
-            }}
-            className={isProductInCart ? "product-is-in-cart" : ""}
-          >
-            {isProductInCart ? "Added to Cart" : "Add to Cart"}
-          </button>
-          <button>Buy Now</button>
-        </div>
+            <div className="product-actions">
+              <button
+                onClick={(e) => {
+                  setChosenProduct({
+                    isChosen: true,
+                    quantity: chosenQuantity,
+                  });
+                }}
+                className={isProductInCart ? "product-is-in-cart" : ""}
+              >
+                {isProductInCart ? "Added to Cart" : "Add to Cart"}
+              </button>
+              <button>Buy Now</button>
+            </div>
 
-        <div className="delivery-option">
-          <h3>DELIVERY OPTIONS:</h3>
-          <div className="input-wrapper">
-            <label htmlFor="pincodeinput">Pincode:</label>
-            <input
-              id="pincodeinput"
-              className="textinput"
-              required
-              type="text"
-              name="pincode"
-            />
+            <div className="delivery-option">
+              <h3>DELIVERY OPTIONS:</h3>
+              <div className="input-wrapper">
+                <label htmlFor="pincodeinput">Pincode:</label>
+                <input
+                  id="pincodeinput"
+                  className="textinput"
+                  required
+                  type="text"
+                  name="pincode"
+                />
+              </div>
+              <p>*Please enter PIN code to check delivery time</p>
+            </div>
+            <div className="product-features">
+              <div>
+                <h3>Key Features</h3>
+                <p>{product.description}</p>
+              </div>
+              <div className="product-desclaimer">
+                <h3>Desclaimer:</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Commodi doloribus recusandae atque eligendi facilis inventore.
+                </p>
+              </div>
+            </div>
           </div>
-          <p>*Please enter PIN code to check delivery time</p>
         </div>
-        <div className="product-features">
-          <div>
-            <h3>Key Features</h3>
-            <p>{product.description}</p>
-          </div>
-          <div className="product-desclaimer">
-            <h3>Desclaimer:</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-              doloribus recusandae atque eligendi facilis inventore.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
   );
 }
 
