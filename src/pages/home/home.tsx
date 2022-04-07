@@ -27,7 +27,13 @@ export default function HomePage() {
           </div>
         </div>
 
-        <img src={kachariImage} alt="picture" className="landing-image" />
+        <img
+          src={kachariImage}
+          alt="picture"
+          className="landing-image"
+          width={800}
+          height={450}
+        />
       </div>
       <Benefits />
       <Featured />

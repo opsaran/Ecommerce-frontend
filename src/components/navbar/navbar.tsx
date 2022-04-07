@@ -24,14 +24,16 @@ export default function NavBar({ style }: { style: React.CSSProperties }) {
           </Link>
         </div>
         <div className="nav-options">
-          <a>Fashion</a>
-          <a>Foods</a>
-          <a>Electronicss</a>
-          <a>Grocery</a>
-          <a>Books</a>
+          <a href="#feturedSection_id">Fashion</a>
+          <a href="#feturedSection_id">Foods</a>
+          <a href="#feturedSection_id">Electronicss</a>
+          <a href="#feturedSection_id">Grocery</a>
+          <a href="#feturedSection_id">Books</a>
         </div>
         <div className="nav-icons">
-          <button>{/* <i className="fas fa-search"></i> */}</button>
+          <button name="search">
+            {/* <i className="fas fa-search"></i> */}
+          </button>
           <Link
             to="/cart"
             state={{ backgroundLocation: location }}
@@ -41,9 +43,11 @@ export default function NavBar({ style }: { style: React.CSSProperties }) {
                 : { display: "block" }
             }
           >
+            cart
             {/* <i className="fas fa-shopping-cart"></i> */}
           </Link>
           <button
+            name="account"
             onClick={() =>
               setStyles((prev) => {
                 if (prev.display === "flex") {
@@ -56,7 +60,11 @@ export default function NavBar({ style }: { style: React.CSSProperties }) {
             // onMouseOver={() => setStyles({ display: "flex" })}
             // onMouseLeave={() => setStyles({ display: "none" })}
           ></button>
-          <button onClick={handleham} className="nav-ham-button">
+          <button
+            name="all-links-ham"
+            onClick={handleham}
+            className="nav-ham-button"
+          >
             {/* <i className="fas fa-bars"></i> */}
           </button>
         </div>

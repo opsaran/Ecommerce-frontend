@@ -77,15 +77,15 @@ function Featured(): JSX.Element {
   }, [page]);
 
   if (loading) {
-    return <p>Loading....</p>;
+    return <p id="feturedSection_id">Loading....</p>;
   }
 
   if (errors) {
-    return <p>{errors}</p>;
+    return <p id="feturedSection_id">{errors}</p>;
   }
 
   return (
-    <section className="featured-section">
+    <section className="featured-section" id="feturedSection_id">
       <h2>Featured Products</h2>
       <ul className="featured-products">
         {featuredProducts.map((product) => {
