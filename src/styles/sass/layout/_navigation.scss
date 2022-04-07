@@ -24,10 +24,15 @@ nav {
   }
 }
 .brand-logo {
-  font-family: $logo-font;
-  font-weight: $bold-font-weight;
-  color: $color-primary;
-  font-size: 1.3rem;
+  // font-family: $logo-font;
+  // font-weight: $bold-font-weight;
+  // color: $color-primary;
+  font-size: 0;
+  width: 6rem;
+  height: 2rem;
+  background-image: url("/images/iconcollection/allicons.png");
+  background-position: -90px -5px;
+  background-repeat: no-repeat;
 }
 
 .nav-icons {

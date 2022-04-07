@@ -83,10 +83,6 @@ function Login() {
 
   return (
     <div className="signIn">
-      {}
-      <a href="#" className="brand-logo">
-        RajFoods
-      </a>
       <form className="signIn-form" onSubmit={handleSubmit}>
         <h2>Sign-In</h2>
         <div className="input-wrapper">

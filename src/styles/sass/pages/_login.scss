@@ -3,15 +3,9 @@
 
 .signIn {
   width: 35%;
-  margin: 1rem auto;
+  margin: 2.5rem auto;
   position: relative;
   padding: 0rem 2rem;
-
-  .brand-logo {
-    font-size: 2rem;
-    text-align: center;
-    display: block;
-  }
 
   > div {
     margin-top: 0.5rem;
@@ -94,7 +88,7 @@
   }
 }
 
-@media (max-width: $medium-screens) {
+@media (min-width: $small-screens) and (max-width: $medium-screens) {
   .signIn {
     width: 60%;
   }
@@ -103,5 +97,6 @@
 @media (max-width: $small-screens) {
   .signIn {
     width: 80%;
+    padding: 0;
   }
 }
