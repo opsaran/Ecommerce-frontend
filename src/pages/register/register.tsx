@@ -64,7 +64,8 @@ function Signup() {
             success: false,
             error: error.response.data.message,
           });
-          console.log(error.response.data.message);
+        } finally {
+          setIsSubmit(false);
         }
       }
       postData();
@@ -122,7 +123,7 @@ function Signup() {
         <div>
           {Object.keys(postedResult).length > 0 && postedResult.success ? (
             <p style={{ color: "green", fontWeight: 900 }}>
-              <i className="fas fa-check-double"></i> Registered Successfully!!
+              Registered Successfully!!
             </p>
           ) : (
             <p style={{ color: "red", fontWeight: 900 }}>
@@ -197,7 +198,7 @@ function Signup() {
             />
           </div>
           <p>{errors.confirmPassword}</p>
-          <button>CONTINUE</button>
+          <button>{isSubmit ? "Submitting..." : "CONTINUE"}</button>
         </form>
         <button
           onClick={() => {

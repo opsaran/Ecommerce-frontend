@@ -30,7 +30,9 @@ function Login() {
   });
 
   const [errors, setErrors] = useState<errorsInterface>({});
+  const [serverError, setServerError] = useState<string | undefined>();
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+
   const usenavigate = useNavigate();
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,6 +43,7 @@ function Login() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setErrors(validateFormData(formData));
     setIsSubmit(true);
   };
@@ -54,12 +57,14 @@ function Login() {
             "/sessions",
             formData
           );
-          console.log("Successfully logged in", responseData.data.name);
+
           setUser({ active: true, name: responseData.data.name });
 
           usenavigate("/", { replace: true });
         } catch (error: any) {
-          console.log("could not login: ", error.response.data.message);
+          setServerError(error.response.data.message);
+        } finally {
+          setIsSubmit(false);
         }
       }
       postData();
@@ -98,6 +103,7 @@ function Login() {
           />
         </div>
         {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        {serverError && <p style={{ color: "red" }}>{serverError}</p>}
         <div className="input-wrapper">
           <label htmlFor="passwordLogin">Password</label>
           <input
@@ -110,7 +116,7 @@ function Login() {
           />
         </div>
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        <button>Continue</button>
+        <button>{isSubmit ? "Submitting..." : "Continue"}</button>
         <div>
           <p>By continuing, you agree to our terms and conditions.</p>
         </div>

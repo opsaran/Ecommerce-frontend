@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authContext from "../../contexts/authcontext";
 import axiosInstance from "../../utils/axiosInstance";
 
@@ -10,6 +10,7 @@ export default function AccountHoverBox({
   styles: React.CSSProperties;
   setStyles: any;
 }) {
+  const navigate = useNavigate();
   const { user, setUser } = useContext(authContext);
   const [loggingOut, setLoggingOut] = useState<boolean>(false);
   async function Logout() {
@@ -53,6 +54,9 @@ export default function AccountHoverBox({
               <Link to="/">Your account</Link>
             </div>
             <hr />
+            <button onClick={() => navigate({ pathname: "sellerpost" })}>
+              Sell Stuff
+            </button>
             <button onClick={() => Logout()}>
               {loggingOut ? "Logging Out..." : "Sign Out"}
             </button>
